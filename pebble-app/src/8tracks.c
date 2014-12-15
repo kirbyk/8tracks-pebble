@@ -1,7 +1,16 @@
 #include <pebble.h>
 
-static Window *window;
-static TextLayer *text_layer;
+static Window* window;
+static TextLayer* text_layer;
+
+static ActionBarLayer* action_bar;
+
+static GBitmap* action_icon_play;
+static GBitmap* action_icon_pause;
+static GBitmap* action_icon_volume_up;
+static GBitmap* action_icon_volume_down;
+static GBitmap* action_icon_right_arrow;
+
 static bool is_playing = false;
 
 typedef enum {
@@ -86,6 +95,13 @@ static void window_load(Window *window) {
   text_layer_set_text(text_layer, "Play");
   text_layer_set_text_alignment(text_layer, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(text_layer));
+
+  action_bar = action_bar_layer_create();
+  action_bar_layer_add_to_window(action_bar, window);
+  action_bar_layer_set_click_config_provider(action_bar, click_config_provider);
+
+  action_bar_layer_set_icon(action_bar, BUTTON_ID_SELECT, action_icon_play);
+  action_bar_layer_set_icon(action_bar, BUTTON_ID_DOWN, action_icon_right_arrow);
 }
 
 static void window_unload(Window *window) {
@@ -100,8 +116,13 @@ static void init(void) {
 
   app_message_open(app_message_inbox_size_maximum(), app_message_outbox_size_maximum());
 
+  action_icon_play        = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_ACTION_PLAY);
+  action_icon_pause       = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_ACTION_PAUSE);
+  action_icon_volume_up   = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_ACTION_VOLUME_UP);
+  action_icon_volume_down = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_ACTION_VOLUME_DOWN);
+  action_icon_right_arrow = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_ACTION_RIGHT_ARROW);
+
   window = window_create();
-  window_set_click_config_provider(window, click_config_provider);
   window_set_window_handlers(window, (WindowHandlers) {
     .load = window_load,
     .unload = window_unload,

@@ -259,6 +259,7 @@ Pebble.addEventListener("appmessage", function(msg) {
 
   var code = '1234';
 
+  Firebase.INTERNAL.forceWebSockets();
   var fb = new Firebase('https://8tracks-pebble.firebaseio.com/codes/' + code);
 
   fb.push({

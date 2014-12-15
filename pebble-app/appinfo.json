@@ -2,7 +2,7 @@
   "uuid": "4fc27da1-d0b8-40f0-a23f-32d2fec0f095",
   "shortName": "8tracks",
   "longName": "8tracks",
-  "companyName": "MakeAwesomeHappen",
+  "companyName": "Kirby Kohlmorgen",
   "versionCode": 1,
   "versionLabel": "1.0",
   "watchapp": {
@@ -12,6 +12,32 @@
     "message": 0
   },
   "resources": {
-    "media": []
+    "media": [
+      {
+        "type": "png",
+        "name": "IMAGE_ACTION_PLAY",
+        "file": "images/action_icon_play.png"
+      },
+      {
+        "type": "png",
+        "name": "IMAGE_ACTION_PAUSE",
+        "file": "images/action_icon_pause.png"
+      },
+      {
+        "type": "png",
+        "name": "IMAGE_ACTION_VOLUME_UP",
+        "file": "images/action_icon_volume_up.png"
+      },
+      {
+        "type": "png",
+        "name": "IMAGE_ACTION_VOLUME_DOWN",
+        "file": "images/action_icon_volume_down.png"
+      },
+      {
+        "type": "png",
+        "name": "IMAGE_ACTION_RIGHT_ARROW",
+        "file": "images/action_icon_right_arrow.png"
+      }
+    ]
   }
 }
