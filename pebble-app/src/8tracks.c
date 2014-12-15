@@ -10,7 +10,7 @@ static GBitmap* action_icon_volume_up;
 static GBitmap* action_icon_volume_down;
 static GBitmap* action_icon_right_arrow;
 
-static bool is_playing = false;
+static bool is_playing = true;
 
 typedef enum {
   KEY_MSG = 0x0
@@ -71,7 +71,13 @@ static void send_msg() {
   app_message_outbox_send();
 }
 
+static void update_play_pause_icon() {
+  action_bar_layer_set_icon(action_bar, BUTTON_ID_SELECT, is_playing ? action_icon_pause : action_icon_play);
+  is_playing = !is_playing;
+}
+
 static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
+  update_play_pause_icon();
   send_msg();
 }
 
@@ -87,7 +93,7 @@ static void window_load(Window *window) {
   action_bar_layer_add_to_window(action_bar, window);
   action_bar_layer_set_click_config_provider(action_bar, click_config_provider);
 
-  action_bar_layer_set_icon(action_bar, BUTTON_ID_SELECT, action_icon_play);
+  update_play_pause_icon();
   action_bar_layer_set_icon(action_bar, BUTTON_ID_DOWN, action_icon_right_arrow);
 }
 
