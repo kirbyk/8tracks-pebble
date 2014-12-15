@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+
+  "name": "8tracks Pebble",
+  "description": "This extension binds the 8tracks web player to ones Pebble smartwatch.",
+  "version": "1.0",
+
+  "content_scripts": [
+    {
+      "matches": ["http://8tracks.com/*"],
+      "run_at": "document_end",
+      "js": ["jquery.js", "firebase.js", "8tracks-pebble.js"]
+    }
+  ],
+
+  "permissions": [
+    "http://8tracks.com/*"
+  ]
+}
