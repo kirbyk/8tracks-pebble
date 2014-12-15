@@ -1,7 +1,6 @@
 #include <pebble.h>
 
 static Window* window;
-static TextLayer* text_layer;
 
 static ActionBarLayer* action_bar;
 
@@ -73,13 +72,6 @@ static void send_msg() {
 }
 
 static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
-  if(is_playing) {
-    text_layer_set_text(text_layer, "Play");
-    is_playing = false;
-  } else {
-    text_layer_set_text(text_layer, "Pause");
-    is_playing = true;
-  }
   send_msg();
 }
 
@@ -91,11 +83,6 @@ static void window_load(Window *window) {
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_bounds(window_layer);
 
-  text_layer = text_layer_create((GRect) { .origin = { 0, 72 }, .size = { bounds.size.w, 20 } });
-  text_layer_set_text(text_layer, "Play");
-  text_layer_set_text_alignment(text_layer, GTextAlignmentCenter);
-  layer_add_child(window_layer, text_layer_get_layer(text_layer));
-
   action_bar = action_bar_layer_create();
   action_bar_layer_add_to_window(action_bar, window);
   action_bar_layer_set_click_config_provider(action_bar, click_config_provider);
@@ -105,7 +92,6 @@ static void window_load(Window *window) {
 }
 
 static void window_unload(Window *window) {
-  text_layer_destroy(text_layer);
 }
 
 static void init(void) {
@@ -133,6 +119,12 @@ static void init(void) {
 }
 
 static void deinit(void) {
+  gbitmap_destroy(action_icon_play);
+  gbitmap_destroy(action_icon_pause);
+  gbitmap_destroy(action_icon_volume_up);
+  gbitmap_destroy(action_icon_volume_down);
+  gbitmap_destroy(action_icon_right_arrow);
+
   window_destroy(window);
 }
 
