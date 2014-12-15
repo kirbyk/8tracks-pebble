@@ -1,0 +1,17 @@
+{
+  "uuid": "4fc27da1-d0b8-40f0-a23f-32d2fec0f095",
+  "shortName": "8tracks",
+  "longName": "8tracks",
+  "companyName": "MakeAwesomeHappen",
+  "versionCode": 1,
+  "versionLabel": "1.0",
+  "watchapp": {
+    "watchface": false
+  },
+  "appKeys": {
+    "message": 0
+  },
+  "resources": {
+    "media": []
+  }
+}
